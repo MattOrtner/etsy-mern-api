@@ -29,6 +29,16 @@ exports.postCreateProduct = (req, res) => {
     );
 };
 
+exports.updateProduct = (req, res) => {
+  Product.findByIdAndUpdate(req.params.id, req.body)
+    .then((data) => res.json({ message: "Update successful.", data }))
+    .catch((err) =>
+      res
+        .status(400)
+        .json({ message: "Failed to update product", error: err.message })
+    );
+};
+
 exports.deleteProduct = (req, res) => {
   Product.findOneAndDelete(req.params)
     .then((data) => res.json({ message: "Product deleted successfully", data }))

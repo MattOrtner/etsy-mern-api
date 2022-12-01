@@ -20,4 +20,7 @@ router.post("/products", postCreateProduct);
 // Delete a product
 router.delete("/products/:id", deleteProduct);
 
+// Update a product
+router.put("/products/:id", updateProduct);
+
 module.exports = router;
