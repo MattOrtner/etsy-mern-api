@@ -6,6 +6,7 @@ const {
   getOneProduct,
   postCreateProduct,
   deleteProduct,
+  updateProduct,
 } = require("../controllers/product");
 
 // Get all products

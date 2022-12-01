@@ -1,7 +1,6 @@
 const Product = require("../models/product");
 
 exports.getAllProducts = (req, res) => {
-  console.log("get all products called");
   Product.find()
     .then((products) => res.json(products))
     .catch((err) =>
