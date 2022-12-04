@@ -28,6 +28,9 @@ const ProductSchema = new mongoose.Schema({
     type: [String],
     required: true,
   },
+  labels: {
+    type: [String],
+  },
 });
 
 const Product = new mongoose.model("product", ProductSchema);

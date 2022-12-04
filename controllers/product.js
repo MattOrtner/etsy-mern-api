@@ -1,6 +1,19 @@
 const Product = require("../models/product");
 
 exports.getAllProducts = (req, res) => {
+  if (req.query.q) {
+    return Product.find()
+      .where("labels")
+      .in([req.query.q])
+      .limit(parseInt(req.query.limit) || 10)
+      .then((products) => res.json(products))
+      .catch((err) =>
+        res
+          .status(404)
+          .json({ message: "Products not found", error: err.message })
+      );
+  }
+
   Product.find()
     .then((products) => res.json(products))
     .catch((err) =>
@@ -29,7 +42,10 @@ exports.postCreateProduct = (req, res) => {
 };
 
 exports.updateProduct = (req, res) => {
-  Product.findByIdAndUpdate(req.params.id, req.body)
+  Product.findByIdAndUpdate(req.params.id, req.body, {
+    returnDocument: "after",
+    upsert: "true",
+  })
     .then((data) => res.json({ message: "Update successful.", data }))
     .catch((err) =>
       res
