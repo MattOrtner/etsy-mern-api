@@ -24,7 +24,8 @@ exports.getAllProducts = (req, res) => {
 };
 
 exports.getOneProduct = (req, res) => {
-  Product.findById(req.params)
+  const { id } = req.params;
+  Product.findById({ _id: id })
     .then((product) => res.json(product))
     .catch((err) =>
       res.status(404).json({ message: "Product not found", error: err.message })
